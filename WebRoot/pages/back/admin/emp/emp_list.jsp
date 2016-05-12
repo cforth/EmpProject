@@ -7,6 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 String insertUrl = basePath + "pages/back/admin/emp/emp_insert.jsp" ;
 String deleteUrl = basePath + "pages/back/admin/emp/emp_delete_do.jsp" ;
 String updatePreUrl = basePath + "pages/back/admin/emp/emp_update.jsp" ;
+String backUrl = basePath + "pages/back/admin/emp/emp_list.jsp" ;
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -48,7 +49,7 @@ String updatePreUrl = basePath + "pages/back/admin/emp/emp_update.jsp" ;
 		<td><%=vo.getHiredate()%></td>
 		<td><%=vo.getSal()%></td>
 		<td><%=vo.getComm()%></td>
-		<td><a href="<%=updatePreUrl%>?deptno=<%=vo.getEmpno()%>">修改</a></td>
+		<td><a href="<%=updatePreUrl%>?empno=<%=vo.getEmpno()%>&backurl=<%=backUrl%>">修改</a></td>
 	</tr>
 	<%
 		}

@@ -30,3 +30,11 @@ function validateInsert() {
             validateSal() &&
             validateComm();
 }
+
+function validateUpdate() {
+    return validateEname() &&
+            validateJob() &&
+            validateHiredate() &&
+            validateSal() &&
+            validateComm();
+}

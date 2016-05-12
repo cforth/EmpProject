@@ -10,6 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 String insertUrl = basePath + "pages/back/admin/emp/emp_insert.jsp" ;
 String deleteUrl = basePath + "pages/back/admin/emp/emp_delete_do.jsp" ;
 String updatePreUrl = basePath + "pages/back/admin/emp/emp_update.jsp" ;
+String backUrl = basePath + "pages/back/admin/emp/emp_list_split.jsp" ;
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,7 +25,6 @@ String updatePreUrl = basePath + "pages/back/admin/emp/emp_update.jsp" ;
   
 <body>
 <%
-	String url = basePath + "pages/back/admin/emp/emp_list_split.jsp" ;
     int currentPage = 1 ;
     String keyWord = "" ; //默认的关键字
     int lineSize = 5 ;
@@ -88,7 +88,7 @@ String updatePreUrl = basePath + "pages/back/admin/emp/emp_update.jsp" ;
 		<td><%=vo.getHiredate()%></td>
 		<td><%=vo.getSal()%></td>
 		<td><%=vo.getComm()%></td>
-		<td><a href="<%=updatePreUrl%>?deptno=<%=vo.getEmpno()%>">修改</a></td>
+		<td><a href="<%=updatePreUrl%>?empno=<%=vo.getEmpno()%>&backurl=<%=backUrl%>&cp=<%=currentPage%>&ls=<%=lineSize%>&col=<%=column%>&kw=<%=keyWord%>">修改</a></td>
 	</tr>
 	<%
 		}
@@ -108,7 +108,7 @@ String updatePreUrl = basePath + "pages/back/admin/emp/emp_update.jsp" ;
         <jsp:param name="column" value="<%=column%>"/>
         <jsp:param name="keyWord" value="<%=keyWord%>"/>
         <jsp:param name="allRecorders" value="<%=allRecorders%>"/>
-        <jsp:param name="url" value="<%=url%>"/>
+        <jsp:param name="url" value="<%=backUrl%>"/>
     </jsp:include>
 	</div>
 </body>
