@@ -71,3 +71,11 @@ function deleteAll(url, paramName, eleName) {
 		alert("您还未选择任何要删除的数据！");
 	}
 }
+
+function openPage(url) {
+	window.open(url, "查看详细信息", "width=600;height=500;scollable=yes")
+}
+
+function closePage() {
+	window.close();
+}

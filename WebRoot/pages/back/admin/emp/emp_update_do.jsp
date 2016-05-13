@@ -24,6 +24,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	vo.setHiredate(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("hiredate"))) ;
 	vo.setSal(Double.parseDouble(request.getParameter("sal"))) ;
 	vo.setComm(Double.parseDouble(request.getParameter("comm"))) ;
+	int tempMgr = Integer.parseInt(request.getParameter("mgr")) ;
+	if(tempMgr != 0) { //表示现在有领导
+		Emp mgr = new Emp();
+		mgr.setEmpno(tempMgr); //保存领导编号
+		vo.setMgr(mgr);
+	}
 	String msg = "雇员信息修改失败！";
 	if(ServiceFactory.getIEmpServiceInstance().update(vo)) {
 		msg = "雇员信息修改成功！";

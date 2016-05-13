@@ -40,17 +40,6 @@ public class EmpServiceImpl implements IEmpService {
 	}
 
 	@Override
-	public Emp updatePre(int id) throws Exception {
-		try {
-			return DAOFactory.getIEmpDAOInstance(this.dbc.getConnection()).findById(id) ;
-		} catch(Exception e) {
-			throw e;
-		} finally {
-			dbc.close();
-		}
-	}
-
-	@Override
 	public boolean delete(Set<Integer> ids) throws Exception {
 		try {
 			return DAOFactory.getIEmpDAOInstance(this.dbc.getConnection()).doRemoveBatch(ids);
@@ -80,6 +69,63 @@ public class EmpServiceImpl implements IEmpService {
 			map.put("allEmps",
 					DAOFactory.getIEmpDAOInstance(this.dbc.getConnection())
 						.findAllSplit(currentPage, lineSize, column, keyWord));
+			map.put("empCount",
+					DAOFactory.getIEmpDAOInstance(this.dbc.getConnection())
+						.getAllCount(column, keyWord));
+			return map;
+		} catch(Exception e) {
+			throw e;
+		} finally {
+			dbc.close();
+		}
+	}
+
+	@Override
+	public Emp show(int id) throws Exception {
+		try {
+			return DAOFactory.getIEmpDAOInstance(this.dbc.getConnection()).findByIdDetails(id);
+		} catch(Exception e) {
+			throw e;
+		} finally {
+			dbc.close();
+		}
+	}
+
+	@Override
+	public Map<String, Object> insertPre() throws Exception {
+		try {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("allEmps", DAOFactory.getIEmpDAOInstance(this.dbc.getConnection()).findAll()) ;
+			return map ;
+		} catch(Exception e) {
+			throw e;
+		} finally {
+			dbc.close();
+		}
+	}
+
+	@Override
+	public Map<String, Object> updatePre(int id) throws Exception {
+		try {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("allEmps", DAOFactory.getIEmpDAOInstance(this.dbc.getConnection()).findAll()) ;
+			map.put("emp", DAOFactory.getIEmpDAOInstance(this.dbc.getConnection()).findByIdDetails(id)) ;
+			return map ;
+		} catch(Exception e) {
+			throw e;
+		} finally {
+			dbc.close();
+		}
+	}
+
+	@Override
+	public Map<String, Object> listDetails(String column, String keyWord,
+			int currentPage, int lineSize) throws Exception {
+		try {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("allEmps",
+					DAOFactory.getIEmpDAOInstance(this.dbc.getConnection())
+						.findAllSplitDetails(column, keyWord, currentPage, lineSize));
 			map.put("empCount",
 					DAOFactory.getIEmpDAOInstance(this.dbc.getConnection())
 						.getAllCount(column, keyWord));

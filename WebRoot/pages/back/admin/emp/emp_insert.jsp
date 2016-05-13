@@ -1,9 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="com.cfxyz.cf.vo.*"%>
+<%@ page import="com.cfxyz.cf.factory.*"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String insertUrl = basePath + "pages/back/admin/emp/emp_insert_do.jsp" ;
-String listUrl = basePath + "pages/back/admin/emp/emp_list_split.jsp" ;
+String listUrl = basePath + "pages/back/admin/emp/emp_list_details.jsp" ;
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -18,6 +20,10 @@ String listUrl = basePath + "pages/back/admin/emp/emp_list_split.jsp" ;
 </head>
   
 <body>
+<% 
+	Map<String,Object> map = ServiceFactory.getIEmpServiceInstance().insertPre();
+	List<Emp> allEmps = (List<Emp>)map.get("allEmps"); //列出雇员信息
+%>
 	<form action="<%=insertUrl%>" method="post" onsubmit="return validateInsert()">
 		<table border="1" cellpadding="5" cellspacing="0" bgcolor="#F2F2F2" width="100%">
 			<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
@@ -37,6 +43,24 @@ String listUrl = basePath + "pages/back/admin/emp/emp_list_split.jsp" ;
 				<td width="15%"><strong>雇员职位：</strong></td>
 				<td width="45%"><input type="text" name="job" id="job" class="init" onblur="validateJob()"></td>
 				<td width="40%"><span id="jobMsg"></span></td>
+			</tr>
+			<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
+				<td width="15%"><strong>雇员领导：</strong></td>
+				<td width="45%">
+					<select name="mgr" id="mgr" class="init">
+						<option value="0">==== 没有领导 ====</option>
+						<% 
+							Iterator<Emp> empIter = allEmps.iterator();
+							while(empIter.hasNext()) {
+								Emp tempEmp = empIter.next();
+						%>
+								<option value="<%=tempEmp.getEmpno()%>"><%=tempEmp.getEname()%></option>
+						<%
+							}
+						%>
+					</select>
+				</td>
+				<td width="40%"><span id="mgrMsg"></span></td>
 			</tr>
 			<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
 				<td width="15%"><strong>雇佣日期：</strong></td>

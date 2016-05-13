@@ -11,6 +11,13 @@ public class Emp implements Serializable {
 	private Date hiredate;
 	private Double sal;
 	private Double comm;
+	private Emp mgr ;
+	public Emp getMgr() {
+		return mgr;
+	}
+	public void setMgr(Emp mgr) {
+		this.mgr = mgr;
+	}
 	public Integer getEmpno() {
 		return empno;
 	}

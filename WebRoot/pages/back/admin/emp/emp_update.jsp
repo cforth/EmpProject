@@ -22,7 +22,9 @@ String updateUrl = basePath + "pages/back/admin/emp/emp_update_do.jsp" ;
 <% 
 	//接收地址重写传递而来的部门编号
 	int empno = Integer.parseInt(request.getParameter("empno")) ;
-	Emp vo = ServiceFactory.getIEmpServiceInstance().updatePre(empno) ;
+	Map<String,Object> map = ServiceFactory.getIEmpServiceInstance().updatePre(empno) ;
+	List<Emp> allEmps = (List<Emp>)map.get("allEmps"); //列出所有雇员信息
+	Emp vo = (Emp)map.get("emp");
 	if(vo != null) {
 %>
 	<form action="<%=updateUrl%>" method="post" onsubmit="return validateUpdate()">
@@ -44,6 +46,24 @@ String updateUrl = basePath + "pages/back/admin/emp/emp_update_do.jsp" ;
 				<td width="15%"><strong>雇员职位：</strong></td>
 				<td width="45%"><input type="text" name="job" id="job" class="init" onblur="validateJob()" value="<%=vo.getJob()%>"></td>
 				<td width="40%"><span id="jobMsg"></span></td>
+			</tr>
+			<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
+				<td width="15%"><strong>雇员领导：</strong></td>
+				<td width="45%">
+					<select name="mgr" id="mgr" class="init">
+						<option value="0">==== 没有领导 ====</option>
+						<% 
+							Iterator<Emp> empIter = allEmps.iterator();
+							while(empIter.hasNext()) {
+								Emp tempEmp = empIter.next();
+						%>
+								<option value="<%=tempEmp.getEmpno()%>" <%=tempEmp.getEmpno().equals(vo.getMgr().getEmpno())?"selected":""%>><%=tempEmp.getEname()%></option>
+						<%
+							}
+						%>
+					</select>
+				</td>
+				<td width="40%"><span id="mgrMsg"></span></td>
 			</tr>
 			<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
 				<td width="15%"><strong>雇佣日期：</strong></td>

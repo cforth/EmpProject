@@ -25,6 +25,12 @@ String url = basePath + "pages/back/admin/emp/emp_insert.jsp" ;
 	vo.setHiredate(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("hiredate"))) ;
 	vo.setSal(Double.parseDouble(request.getParameter("sal"))) ;
 	vo.setComm(Double.parseDouble(request.getParameter("comm"))) ;
+	int tempMgr = Integer.parseInt(request.getParameter("mgr")) ;
+	if(tempMgr != 0) { //表示现在有领导
+		Emp mgr = new Emp();
+		mgr.setEmpno(tempMgr); //保存领导编号
+		vo.setMgr(mgr);
+	}
 	String msg = "雇员信息增加失败！";
 	if(ServiceFactory.getIEmpServiceInstance().insert(vo)) {
 		msg = "雇员信息增加成功！";
