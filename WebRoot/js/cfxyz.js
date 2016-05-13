@@ -65,7 +65,7 @@ function deleteAll(url, paramName, eleName) {
 	}
 	if(count > 0) { //有要删除的数据
 		if(window.confirm("确定要删除这些数据吗？")) {
-			window.location = url + "?" + paramName + "=" + data ;
+			window.location = url + "&" + paramName + "=" + data ;
 		}
 	} else {
 		alert("您还未选择任何要删除的数据！");

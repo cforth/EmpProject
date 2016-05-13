@@ -49,7 +49,7 @@ String updatePreUrl = basePath + "pages/back/admin/dept/dept_update.jsp" ;
 	%>
 	<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
 		<td colspan="5">
-		<input type="button" value="删除部门信息" onclick="deleteAll('<%=deleteUrl%>','dno','deptno')">
+		<input type="button" value="删除部门信息" onclick="deleteAll('<%=deleteUrl%>?p=p','dno','deptno')">
 		<a href="<%=insertUrl%>">增加新部门</a>
 		</td>
 	</tr>

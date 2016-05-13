@@ -117,4 +117,12 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 		return super.countHandle("emp", column, keyWord);
 	}
 
+	@Override
+	public void doRemoveByDeptno(Integer deptno) throws Exception {
+		String sql = "DELETE FROM emp WHERE deptno = ?";
+		this.pstmt = this.conn.prepareStatement(sql);
+		this.pstmt.setInt(1, deptno);
+		this.pstmt.executeUpdate() ;
+	}
+
 }

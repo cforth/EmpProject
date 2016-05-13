@@ -1,5 +1,6 @@
 package com.cfxyz.cf.service.impl;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -39,8 +40,21 @@ public class DeptServiceImpl implements IDeptService {
 	@Override
 	public boolean delete(Set<Integer> ids) throws Exception {
 		try {
-			return DAOFactory.getIDeptDAOInstance(this.dbc.getConnection()).doRemoveBatch(ids);
+			//1、取消掉事务的自动提交
+			this.dbc.getConnection().setAutoCommit(false);
+			boolean flag = false ; //表示最终是否成功的标记
+			//2.删除所有雇员
+			Iterator<Integer> iter = ids.iterator();
+			while(iter.hasNext()) {
+				//根据部门编号删除每一个部门的所有雇员信息
+				DAOFactory.getIEmpDAOInstance(this.dbc.getConnection()).doRemoveByDeptno(iter.next());
+			}
+			//3、删除所有的部门信息
+			flag = DAOFactory.getIDeptDAOInstance(this.dbc.getConnection()).doRemoveBatch(ids);
+			this.dbc.getConnection().commit();
+			return flag ;
 		} catch (Exception e) {
+			this.dbc.getConnection().rollback();
 			throw e;
 		} finally {
 			this.dbc.close();

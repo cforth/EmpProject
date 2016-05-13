@@ -56,7 +56,7 @@ String backUrl = basePath + "pages/back/admin/emp/emp_list.jsp" ;
 	%>
 	<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
 		<td colspan="8">
-		<input type="button" value="删除雇员信息" onclick="deleteAll('<%=deleteUrl%>','eno','empno')">
+		<input type="button" value="删除雇员信息" onclick="deleteAll('<%=deleteUrl%>?backurl=<%=backUrl%>','eno','empno')">
 		<a href="<%=insertUrl%>">增加新雇员</a>
 		</td>
 	</tr>
