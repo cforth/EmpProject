@@ -12,6 +12,7 @@ String deleteUrl = basePath + "pages/back/admin/emp/emp_delete_do.jsp" ;
 String updatePreUrl = basePath + "pages/back/admin/emp/emp_update.jsp" ;
 String backUrl = basePath + "pages/back/admin/emp/emp_list_details.jsp" ;
 String showUrl = basePath + "pages/back/admin/emp/emp_show.jsp" ;
+String deptShowUrl = basePath + "pages/back/admin/dept/dept_show.jsp" ;
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -69,11 +70,12 @@ String showUrl = basePath + "pages/back/admin/emp/emp_show.jsp" ;
 <table border="1" cellpadding="5" cellspacing="0" bgcolor="#F2F2F2" width="100%">
 	<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
 		<td width=10%><input type="checkbox" id="selall" onclick="checkboxSelect(this,'empno')"></td>
-		<td width=15%><strong>雇员编号</strong></td>
+		<td width=10%><strong>雇员编号</strong></td>
 		<td width=15%><strong>名称</strong></td>
 		<td width=10%><strong>职位</strong></td>
 		<td width=10%><strong>领导</strong></td>
-		<td width=15%><strong>雇佣日期</strong></td>
+		<td width=10%><strong>部门</strong></td>
+		<td width=10%><strong>雇佣日期</strong></td>
 		<td width=10%><strong>工资</strong></td>
 		<td width=10%><strong>佣金</strong></td>
 		<td width=10%><strong>操作</strong></td>
@@ -88,6 +90,7 @@ String showUrl = basePath + "pages/back/admin/emp/emp_show.jsp" ;
 		<td><a onclick="openPage('<%=showUrl%>?empno=<%=vo.getEmpno()%>')"><%=vo.getEname()%></a></td>
 		<td><%=vo.getJob()%></td>
 		<td><a onclick="openPage('<%=showUrl%>?empno=<%=vo.getMgr().getEmpno()%>')"><%=vo.getMgr().getEname() == null ? "" : vo.getMgr().getEname()%></a></td>
+		<td><a onclick="openPage('<%=deptShowUrl%>?deptno=<%=vo.getDept().getDeptno()%>')"><%=vo.getDept().getDname() == null ? "" : vo.getDept().getDname()%></a></td>
 		<td><%=vo.getHiredate()%></td>
 		<td><%=vo.getSal()%></td>
 		<td><%=vo.getComm()%></td>
@@ -97,7 +100,7 @@ String showUrl = basePath + "pages/back/admin/emp/emp_show.jsp" ;
 		}
 	%>
 	<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
-		<td colspan="8">
+		<td colspan="10">
 		<input type="button" value="删除雇员信息" onclick="deleteAll('<%=deleteUrl%>?backurl=<%=backUrl%>&cp=<%=currentPage%>&ls=<%=lineSize%>&col=<%=column%>&kw=<%=keyWord%>','eno','empno')">
 		<a href="<%=insertUrl%>">增加新雇员</a>
 		</td>

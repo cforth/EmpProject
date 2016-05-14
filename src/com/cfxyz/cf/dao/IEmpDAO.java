@@ -22,12 +22,26 @@ public interface IEmpDAO extends IDAO<Integer, Emp> {
 	
 	/**
 	 * 查询详细的雇员信息，包含有雇员的完整信息、领导信息、部门信息
-	 * @param column
-	 * @param keyWord
-	 * @param currentPage
-	 * @param lineSize
+	 * @param column 模糊查询列
+	 * @param keyWord 模糊查询关键字
+	 * @param currentPage 当前所在页
+	 * @param lineSize 每页显示的数据行数
 	 * @return 以List集合方式返回，如果没有数据返回集合长度为0(size == 0);
 	 * @throws Exception
 	 */
-	public List<Emp> findAllSplitDetails(String column, String keyWord, int currentPage, int lineSize) throws Exception ;
+	public List<Emp> findAllSplitDetails(String column, String keyWord, 
+			Integer currentPage, Integer lineSize) throws Exception ;
+
+	/**
+	 * 根据部门编号查询此部门的全部雇员信息
+	 * @param deptno 部门编号
+	 * @param column 模糊查询列
+	 * @param keyWord 模糊查询关键字
+	 * @param currentPage 当前所在页
+	 * @param lineSize 每页显示的数据行数
+	 * @return 以List集合方式返回，如果没有数据返回集合长度为0(size == 0);
+	 * @throws Exception
+	 */
+	public List<Emp> findAllByDeptno(Integer deptno, String column, String keyWord, 
+			Integer currentPage, Integer lineSize) throws Exception ;
 }

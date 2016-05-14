@@ -10,6 +10,7 @@ import java.util.Set;
 
 import com.cfxyz.cf.dao.IEmpDAO;
 import com.cfxyz.cf.dao.util.AbstractDAOImpl;
+import com.cfxyz.cf.vo.Dept;
 import com.cfxyz.cf.vo.Emp;
 
 public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
@@ -21,7 +22,7 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 
 	@Override
 	public boolean doCreate(Emp vo) throws Exception {
-		String sql = "INSERT INTO emp(empno,ename,job,hiredate,sal,comm,mgr) VALUES(?,?,?,?,?,?,?)" ;
+		String sql = "INSERT INTO emp(empno,ename,job,hiredate,sal,comm,mgr,deptno) VALUES(?,?,?,?,?,?,?,?)" ;
 		this.pstmt = this.conn.prepareStatement(sql) ;
 		this.pstmt.setInt(1, vo.getEmpno());
 		this.pstmt.setString(2, vo.getEname());
@@ -34,12 +35,17 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 		} else {
 			this.pstmt.setInt(7, vo.getMgr().getEmpno()) ;
 		}
+		if(vo.getDept() == null) {
+			this.pstmt.setNull(8, Types.NULL) ;
+		} else {
+			this.pstmt.setInt(8, vo.getDept().getDeptno());
+		}
 		return this.pstmt.executeUpdate() > 0;
 	}
 
 	@Override
 	public boolean doUpdate(Emp vo) throws Exception {
-		String sql = "UPDATE emp SET ename=?,job=?,hiredate=?,sal=?,comm=?,mgr=? WHERE empno=?";
+		String sql = "UPDATE emp SET ename=?,job=?,hiredate=?,sal=?,comm=?,mgr=?,deptno=? WHERE empno=?";
 		this.pstmt = this.conn.prepareStatement(sql);
 		this.pstmt.setString(1, vo.getEname());
 		this.pstmt.setString(2, vo.getJob());
@@ -51,7 +57,12 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 		} else {
 			this.pstmt.setInt(6, vo.getMgr().getEmpno()) ;
 		}
-		this.pstmt.setInt(7, vo.getEmpno());
+		if(vo.getDept() == null) {
+			this.pstmt.setNull(7, Types.NULL) ;
+		} else {
+			this.pstmt.setInt(7, vo.getDept().getDeptno());
+		}
+		this.pstmt.setInt(8, vo.getEmpno());
 		return this.pstmt.executeUpdate() > 0;
 	}
 
@@ -140,9 +151,9 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 	public Emp findByIdDetails(Integer id) throws Exception {
 		Emp vo = null ;
 		String sql = "SELECT e.empno,e.ename,e.job,e.hiredate,e.sal,e.comm, "
-				+ " m.empno mno,m.ename mname "
-				+ " FROM emp e, emp m "
-				+ " WHERE e.empno = ? AND e.mgr=m.empno(+)" ;
+				+ " m.empno mno,m.ename mname,d.deptno dno,d.dname dna "
+				+ " FROM emp e, emp m, dept d "
+				+ " WHERE e.empno = ? AND e.mgr=m.empno(+) AND e.deptno=d.deptno(+)" ;
 		this.pstmt = this.conn.prepareStatement(sql);
 		this.pstmt.setInt(1, id);
 		ResultSet rs = this.pstmt.executeQuery();
@@ -158,19 +169,24 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 			mgr.setEmpno(rs.getInt(7));
 			mgr.setEname(rs.getString(8));
 			vo.setMgr(mgr);
+			Dept dept = new Dept();
+			dept.setDeptno(rs.getInt(9));
+			dept.setDname(rs.getString(10));
+			vo.setDept(dept);
 		}
 		return vo ;
 	}
 
 	@Override
 	public List<Emp> findAllSplitDetails(String column, String keyWord,
-			int currentPage, int lineSize) throws Exception {
+			Integer currentPage, Integer lineSize) throws Exception {
 		List<Emp> all = new ArrayList<Emp>();
 		String sql = "SELECT * FROM ( "
 				+ " SELECT e.empno,e.ename,e.job,e.hiredate,e.sal,e.comm, "
-				+ " m.empno mno,m.ename mname, ROWNUM rn "
-				+ " FROM emp e,emp m WHERE e. " 
-				+ column + " LIKE ? AND e.mgr=m.empno(+) AND ROWNUM <=?) temp "
+				+ " m.empno mno,m.ename mname,d.deptno dno,d.dname dna,ROWNUM rn "
+				+ " FROM emp e,emp m, dept d "
+				+ " WHERE e. " 
+				+ column + " LIKE ? AND e.mgr=m.empno(+) AND e.deptno=d.deptno(+) AND ROWNUM <=?) temp "
 				+ " WHERE temp.rn > ?" ;
 		this.pstmt = this.conn.prepareStatement(sql);
 		this.pstmt.setString(1, "%" + keyWord + "%");
@@ -189,6 +205,49 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 			mgr.setEmpno(rs.getInt(7));
 			mgr.setEname(rs.getString(8));
 			vo.setMgr(mgr);
+			Dept dept = new Dept();
+			dept.setDeptno(rs.getInt(9));
+			dept.setDname(rs.getString(10));
+			vo.setDept(dept);
+			all.add(vo);
+		}
+		return all ;
+	}
+
+	@Override
+	public List<Emp> findAllByDeptno(Integer deptno, String column,
+			String keyWord, Integer currentPage, Integer lineSize)
+			throws Exception {
+		List<Emp> all = new ArrayList<Emp>();
+		String sql = "SELECT * FROM ( "
+				+ " SELECT e.empno,e.ename,e.job,e.hiredate,e.sal,e.comm, "
+				+ " m.empno mno,m.ename mname,d.deptno dno,d.dname dna,ROWNUM rn "
+				+ " FROM emp e,emp m dept d "
+				+ " WHERE e. " 
+				+ column + " LIKE ? AND d.deptno=? AND e.mgr=m.empno(+) AND e.deptno=d.deptno(+) AND ROWNUM <=?) temp "
+				+ " WHERE temp.rn > ?" ;
+		this.pstmt = this.conn.prepareStatement(sql);
+		this.pstmt.setString(1, "%" + keyWord + "%");
+		this.pstmt.setInt(2, deptno);
+		this.pstmt.setInt(3, currentPage * lineSize);
+		this.pstmt.setInt(4, (currentPage - 1) * lineSize);
+		ResultSet rs = this.pstmt.executeQuery();
+		while(rs.next()) {
+			Emp vo = new Emp();
+			vo.setEmpno(rs.getInt(1));
+			vo.setEname(rs.getString(2));
+			vo.setJob(rs.getString(3));
+			vo.setHiredate(rs.getDate(4));
+			vo.setSal(rs.getDouble(5));
+			vo.setComm(rs.getDouble(6));
+			Emp mgr = new Emp();
+			mgr.setEmpno(rs.getInt(7));
+			mgr.setEname(rs.getString(8));
+			vo.setMgr(mgr);
+			Dept dept = new Dept();
+			dept.setDeptno(rs.getInt(9));
+			dept.setDname(rs.getString(10));
+			vo.setDept(dept);
 			all.add(vo);
 		}
 		return all ;

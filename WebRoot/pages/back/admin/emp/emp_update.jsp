@@ -24,6 +24,7 @@ String updateUrl = basePath + "pages/back/admin/emp/emp_update_do.jsp" ;
 	int empno = Integer.parseInt(request.getParameter("empno")) ;
 	Map<String,Object> map = ServiceFactory.getIEmpServiceInstance().updatePre(empno) ;
 	List<Emp> allEmps = (List<Emp>)map.get("allEmps"); //列出所有雇员信息
+	List<Dept> allDepts = (List<Dept>)map.get("allDepts"); //列出已有的部门信息
 	Emp vo = (Emp)map.get("emp");
 	if(vo != null) {
 %>
@@ -64,6 +65,24 @@ String updateUrl = basePath + "pages/back/admin/emp/emp_update_do.jsp" ;
 					</select>
 				</td>
 				<td width="40%"><span id="mgrMsg"></span></td>
+			</tr>
+			<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
+				<td width="15%"><strong>所在部门：</strong></td>
+				<td width="45%">
+					<select name="deptno" id="deptno" class="init">
+						<option value="0">==== 没有部门 ====</option>
+						<% 
+							Iterator<Dept> deptIter = allDepts.iterator();
+							while(deptIter.hasNext()) {
+								Dept tempDept = deptIter.next();
+						%>
+								<option value="<%=tempDept.getDeptno()%>" <%=tempDept.getDeptno().equals(vo.getDept().getDeptno())?"selected":""%>><%=tempDept.getDname()%></option>
+						<%
+							}
+						%>
+					</select>
+				</td>
+				<td width="40%"><span id="deptnoMsg"></span></td>
 			</tr>
 			<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
 				<td width="15%"><strong>雇佣日期：</strong></td>

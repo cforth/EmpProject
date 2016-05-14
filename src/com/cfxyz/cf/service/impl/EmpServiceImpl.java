@@ -96,6 +96,7 @@ public class EmpServiceImpl implements IEmpService {
 		try {
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("allEmps", DAOFactory.getIEmpDAOInstance(this.dbc.getConnection()).findAll()) ;
+			map.put("allDepts", DAOFactory.getIDeptDAOInstance(this.dbc.getConnection()).findAll());
 			return map ;
 		} catch(Exception e) {
 			throw e;
@@ -110,6 +111,7 @@ public class EmpServiceImpl implements IEmpService {
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("allEmps", DAOFactory.getIEmpDAOInstance(this.dbc.getConnection()).findAll()) ;
 			map.put("emp", DAOFactory.getIEmpDAOInstance(this.dbc.getConnection()).findByIdDetails(id)) ;
+			map.put("allDepts", DAOFactory.getIDeptDAOInstance(this.dbc.getConnection()).findAll());
 			return map ;
 		} catch(Exception e) {
 			throw e;

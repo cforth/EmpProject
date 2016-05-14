@@ -30,6 +30,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		mgr.setEmpno(tempMgr); //保存领导编号
 		vo.setMgr(mgr);
 	}
+	int tempDept = Integer.parseInt(request.getParameter("deptno")) ;
+	if(tempDept != 0) { //表示现在有部门
+		Dept dept = new Dept(); //保存部门编号
+		dept.setDeptno(tempDept);
+		vo.setDept(dept);
+	}
 	String msg = "雇员信息修改失败！";
 	if(ServiceFactory.getIEmpServiceInstance().update(vo)) {
 		msg = "雇员信息修改成功！";

@@ -22,7 +22,8 @@ String listUrl = basePath + "pages/back/admin/emp/emp_list_details.jsp" ;
 <body>
 <% 
 	Map<String,Object> map = ServiceFactory.getIEmpServiceInstance().insertPre();
-	List<Emp> allEmps = (List<Emp>)map.get("allEmps"); //列出雇员信息
+	List<Emp> allEmps = (List<Emp>)map.get("allEmps"); //列出已有的雇员信息
+	List<Dept> allDepts = (List<Dept>)map.get("allDepts"); //列出已有的部门信息
 %>
 	<form action="<%=insertUrl%>" method="post" onsubmit="return validateInsert()">
 		<table border="1" cellpadding="5" cellspacing="0" bgcolor="#F2F2F2" width="100%">
@@ -61,6 +62,24 @@ String listUrl = basePath + "pages/back/admin/emp/emp_list_details.jsp" ;
 					</select>
 				</td>
 				<td width="40%"><span id="mgrMsg"></span></td>
+			</tr>
+			<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
+				<td width="15%"><strong>所在部门：</strong></td>
+				<td width="45%">
+					<select name="deptno" id="deptno" class="init">
+						<option value="0">==== 没有部门 ====</option>
+						<% 
+							Iterator<Dept> deptIter = allDepts.iterator();
+							while(deptIter.hasNext()) {
+								Dept tempDept = deptIter.next();
+						%>
+								<option value="<%=tempDept.getDeptno()%>"><%=tempDept.getDname()%></option>
+						<%
+							}
+						%>
+					</select>
+				</td>
+				<td width="40%"><span id="deptnoMsg"></span></td>
 			</tr>
 			<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
 				<td width="15%"><strong>雇佣日期：</strong></td>

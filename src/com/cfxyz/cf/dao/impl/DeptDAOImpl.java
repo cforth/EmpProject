@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
 import com.cfxyz.cf.dao.IDeptDAO;
 import com.cfxyz.cf.dao.util.AbstractDAOImpl;
+import com.cfxyz.cf.dao.util.MathUtil;
 import com.cfxyz.cf.vo.Dept;
 
 public class DeptDAOImpl extends AbstractDAOImpl implements IDeptDAO {
@@ -89,6 +91,58 @@ public class DeptDAOImpl extends AbstractDAOImpl implements IDeptDAO {
 	@Override
 	public Integer getAllCount(String column, String keyWord) throws Exception {
 		throw new Exception("此方法未实现！");
+	}
+
+	@Override
+	public List<Dept> findAllByStat() throws Exception {
+		List<Dept> all = new ArrayList<Dept>();
+		String sql = "SELECT d.deptno,d.dname,d.loc,temp.count,temp.sum,temp.avg,temp.max,temp.min "
+				+ " FROM dept d, ("
+				+ "        SELECT deptno dno,COUNT(empno) count,SUM(sal) sum,AVG(sal) avg,MAX(sal) max,MIN(sal) min "
+				+ " 	   FROM emp ) temp "
+				+ " WHERE d.deptno=temp.dno(+)" ;
+		this.pstmt = super.conn.prepareStatement(sql);
+		ResultSet rs = this.pstmt.executeQuery();
+		while(rs.next()) {
+			Dept vo = new Dept();
+			vo.setDeptno(rs.getInt(1));
+			vo.setDname(rs.getString(2));
+			vo.setLoc(rs.getString(3));
+			vo.setStat(new HashMap<String,Object>());
+			vo.getStat().put("count", rs.getInt(4)) ;
+			vo.getStat().put("sum", rs.getDouble(5)) ;
+			vo.getStat().put("avg", MathUtil.round(rs.getDouble(6), 2)) ;
+			vo.getStat().put("max", rs.getDouble(7)) ;
+			vo.getStat().put("min", rs.getDouble(8)) ;
+			all.add(vo);
+		}
+		return all;
+	}
+
+	@Override
+	public Dept findByIdDetails(Integer id) throws Exception {
+		Dept vo = null ;
+		String sql = "SELECT d.deptno,d.dname,d.loc,temp.count,temp.sum,temp.avg,temp.max,temp.min "
+				+ " FROM dept d, ("
+				+ "        SELECT deptno dno,COUNT(empno) count,SUM(sal) sum,AVG(sal) avg,MAX(sal) max,MIN(sal) min "
+				+ " 	   FROM emp ) temp "
+				+ " WHERE d.deptno=temp.dno(+) AND d.deptno=?" ;
+		this.pstmt = super.conn.prepareStatement(sql);
+		this.pstmt.setInt(1, id);
+		ResultSet rs = this.pstmt.executeQuery();
+		if(rs.next()) {
+			vo = new Dept();
+			vo.setDeptno(rs.getInt(1));
+			vo.setDname(rs.getString(2));
+			vo.setLoc(rs.getString(3));
+			vo.setStat(new HashMap<String,Object>());
+			vo.getStat().put("count", rs.getInt(4)) ;
+			vo.getStat().put("sum", rs.getDouble(5)) ;
+			vo.getStat().put("avg", MathUtil.round(rs.getDouble(6), 2)) ;
+			vo.getStat().put("max", rs.getDouble(7)) ;
+			vo.getStat().put("min", rs.getDouble(8)) ;
+		}
+		return vo;
 	}
 
 }

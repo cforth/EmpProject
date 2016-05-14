@@ -31,6 +31,12 @@ String url = basePath + "pages/back/admin/emp/emp_insert.jsp" ;
 		mgr.setEmpno(tempMgr); //保存领导编号
 		vo.setMgr(mgr);
 	}
+	int tempDept = Integer.parseInt(request.getParameter("deptno")) ;
+	if(tempDept != 0) { //表示现在有部门
+		Dept dept = new Dept(); //保存部门编号
+		dept.setDeptno(tempDept);
+		vo.setDept(dept);
+	}
 	String msg = "雇员信息增加失败！";
 	if(ServiceFactory.getIEmpServiceInstance().insert(vo)) {
 		msg = "雇员信息增加成功！";

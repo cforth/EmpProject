@@ -1,12 +1,28 @@
 package com.cfxyz.cf.vo;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("serial")
 public class Dept implements Serializable {
 	private Integer deptno ;
 	private String dname ;
 	private String loc ;
+	private List<Emp> emps ; //描述多个雇员
+	private Map<String,Object> stat ; //保存所有的统计信息
+	public Map<String, Object> getStat() {
+		return stat;
+	}
+	public void setStat(Map<String, Object> stat) {
+		this.stat = stat;
+	}
+	public List<Emp> getEmps() {
+		return emps;
+	}
+	public void setEmps(List<Emp> emps) {
+		this.emps = emps;
+	}
 	public Integer getDeptno() {
 		return deptno;
 	}

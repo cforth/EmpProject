@@ -83,4 +83,31 @@ public class DeptServiceImpl implements IDeptService {
 		}
 	}
 
+	@Override
+	public List<Dept> listDetails() throws Exception {
+		try {
+			return DAOFactory.getIDeptDAOInstance(this.dbc.getConnection()).findAllByStat();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+	}
+
+	@Override
+	public Dept show(Integer id, String column, String keyWord,
+			int currentPage, int lineSize) throws Exception {
+		try {
+			Dept dept = DAOFactory.getIDeptDAOInstance(this.dbc.getConnection()).findByIdDetails(id) ;
+			if(dept != null) { //有这个部门信息
+				dept.setEmps(DAOFactory.getIEmpDAOInstance(this.dbc.getConnection()).findAllByDeptno(id, column, keyWord, currentPage, lineSize));
+			}
+			return dept;
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			this.dbc.close();
+		}
+	}
+
 }

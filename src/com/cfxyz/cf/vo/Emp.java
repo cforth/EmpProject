@@ -12,6 +12,13 @@ public class Emp implements Serializable {
 	private Double sal;
 	private Double comm;
 	private Emp mgr ;
+	private Dept dept ;
+	public Dept getDept() {
+		return dept;
+	}
+	public void setDept(Dept dept) {
+		this.dept = dept;
+	}
 	public Emp getMgr() {
 		return mgr;
 	}
