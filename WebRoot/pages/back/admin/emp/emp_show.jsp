@@ -52,7 +52,7 @@ String deptShowUrl = basePath + "pages/back/admin/dept/dept_show.jsp" ;
 		</tr>
 		<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
 			<td width="15%"><strong>所在部门：</strong></td>
-			<td width="45%"><a href="<%=deptShowUrl%>?empno=<%=vo.getDept().getDeptno()%>"><%=vo.getDept().getDname() == null ? "" : vo.getDept().getDname()%></a></td>
+			<td width="45%"><a href="<%=deptShowUrl%>?deptno=<%=vo.getDept().getDeptno()%>"><%=vo.getDept().getDname() == null ? "" : vo.getDept().getDname()%></a></td>
 			<td width="40%"><span id="hiredateMsg"></span></td>
 		</tr>
 		<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">

@@ -21,6 +21,10 @@ String listUrl = basePath + "pages/back/admin/emp/emp_list_details.jsp" ;
   
 <body>
 <% 
+	int deptno = 0;
+	if(request.getParameter("deptno") != null) {
+		deptno = Integer.parseInt(request.getParameter("deptno")) ;
+	}
 	Map<String,Object> map = ServiceFactory.getIEmpServiceInstance().insertPre();
 	List<Emp> allEmps = (List<Emp>)map.get("allEmps"); //列出已有的雇员信息
 	List<Dept> allDepts = (List<Dept>)map.get("allDepts"); //列出已有的部门信息
@@ -73,7 +77,7 @@ String listUrl = basePath + "pages/back/admin/emp/emp_list_details.jsp" ;
 							while(deptIter.hasNext()) {
 								Dept tempDept = deptIter.next();
 						%>
-								<option value="<%=tempDept.getDeptno()%>"><%=tempDept.getDname()%></option>
+								<option value="<%=tempDept.getDeptno()%>" <%=tempDept.getDeptno().equals(deptno) ? "selected" : ""%> ><%=tempDept.getDname()%></option>
 						<%
 							}
 						%>

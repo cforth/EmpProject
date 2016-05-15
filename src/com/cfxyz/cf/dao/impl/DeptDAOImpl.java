@@ -99,7 +99,8 @@ public class DeptDAOImpl extends AbstractDAOImpl implements IDeptDAO {
 		String sql = "SELECT d.deptno,d.dname,d.loc,temp.count,temp.sum,temp.avg,temp.max,temp.min "
 				+ " FROM dept d, ("
 				+ "        SELECT deptno dno,COUNT(empno) count,SUM(sal) sum,AVG(sal) avg,MAX(sal) max,MIN(sal) min "
-				+ " 	   FROM emp ) temp "
+				+ " 	   FROM emp "
+				+ "		   GROUP BY deptno) temp "
 				+ " WHERE d.deptno=temp.dno(+)" ;
 		this.pstmt = super.conn.prepareStatement(sql);
 		ResultSet rs = this.pstmt.executeQuery();
@@ -125,7 +126,8 @@ public class DeptDAOImpl extends AbstractDAOImpl implements IDeptDAO {
 		String sql = "SELECT d.deptno,d.dname,d.loc,temp.count,temp.sum,temp.avg,temp.max,temp.min "
 				+ " FROM dept d, ("
 				+ "        SELECT deptno dno,COUNT(empno) count,SUM(sal) sum,AVG(sal) avg,MAX(sal) max,MIN(sal) min "
-				+ " 	   FROM emp ) temp "
+				+ " 	   FROM emp "
+				+ "		   GROUP BY deptno) temp "
 				+ " WHERE d.deptno=temp.dno(+) AND d.deptno=?" ;
 		this.pstmt = super.conn.prepareStatement(sql);
 		this.pstmt.setInt(1, id);

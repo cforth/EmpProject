@@ -10,6 +10,8 @@
         <jsp:param name="keyWord" value="<%=keyWord%>"/>
         <jsp:param name="allRecorders" value="<%=allRecorders%>"/>
         <jsp:param name="url" value="<%=url%>"/>
+        <jsp:param name="paramName" value="参数名称"/>
+        <jsp:param name="paramValue" value="参数内容"/>
     </jsp:include>
 	</div>
 --%>
@@ -26,6 +28,8 @@
 	int pageSize = 0 ;
 	int lsData[] = new int [] {1,5,10,15,20,30,50,100} ;
     int seed = 3; //种子数
+    String paramName = request.getParameter("paramName");
+    String paramValue = request.getParameter("paramValue");
     %>
 <% //接受传递的参数
 	try {
@@ -46,9 +50,9 @@
         try {
         	var eleKw = document.getElementById("kw").value ;
         	var eleCol = document.getElementById("colSel").value ;
-        	window.location = "<%=url%>?cp=" + vcp + "&ls=<%=lineSize%>" + "&col=" + eleCol + "&kw=" + eleKw ; 
+        	window.location = "<%=url%>?cp=" + vcp + "&ls=<%=lineSize%>" + "&col=" + eleCol + "&kw=" + eleKw + "&<%=paramName%>=<%=paramValue%>" ; 
         } catch (Exception) {
-			window.location = "<%=url%>?cp=" + vcp + "&ls=<%=lineSize%>" ;
+			window.location = "<%=url%>?cp=" + vcp + "&ls=<%=lineSize%>" + "&<%=paramName%>=<%=paramValue%>" ;
         }
     }
 </script>

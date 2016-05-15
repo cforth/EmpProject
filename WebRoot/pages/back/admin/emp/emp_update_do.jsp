@@ -46,6 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	buf.append("&ls=").append(request.getParameter("ls")) ;
 	buf.append("&col=").append(request.getParameter("col")) ;
 	buf.append("&kw=").append(request.getParameter("kw")) ;
+	buf.append("&deptno=").append(request.getParameter("deptno")) ;
 %>
 <script type="text/javascript">
 	alert("<%=msg%>");

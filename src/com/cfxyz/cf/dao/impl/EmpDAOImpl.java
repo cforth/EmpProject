@@ -222,7 +222,7 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 		String sql = "SELECT * FROM ( "
 				+ " SELECT e.empno,e.ename,e.job,e.hiredate,e.sal,e.comm, "
 				+ " m.empno mno,m.ename mname,d.deptno dno,d.dname dna,ROWNUM rn "
-				+ " FROM emp e,emp m dept d "
+				+ " FROM emp e,emp m, dept d "
 				+ " WHERE e. " 
 				+ column + " LIKE ? AND d.deptno=? AND e.mgr=m.empno(+) AND e.deptno=d.deptno(+) AND ROWNUM <=?) temp "
 				+ " WHERE temp.rn > ?" ;
