@@ -1,7 +1,9 @@
 package com.cfxyz.cf.factory;
 
+import com.cfxyz.cf.service.IAdminService;
 import com.cfxyz.cf.service.IDeptService;
 import com.cfxyz.cf.service.IEmpService;
+import com.cfxyz.cf.service.impl.AdminServiceImpl;
 import com.cfxyz.cf.service.impl.DeptServiceImpl;
 import com.cfxyz.cf.service.impl.EmpServiceImpl;
 
@@ -12,5 +14,9 @@ public class ServiceFactory {
 	
 	public static IEmpService getIEmpServiceInstance() {
 		return new EmpServiceImpl() ;
+	}
+	
+	public static IAdminService getIAdinServiceInstance() {
+		return new AdminServiceImpl() ;
 	}
 }
