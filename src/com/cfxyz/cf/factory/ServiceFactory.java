@@ -16,7 +16,7 @@ public class ServiceFactory {
 		return new EmpServiceImpl() ;
 	}
 	
-	public static IAdminService getIAdinServiceInstance() {
+	public static IAdminService getIAdminServiceInstance() {
 		return new AdminServiceImpl() ;
 	}
 }

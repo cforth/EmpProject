@@ -57,7 +57,7 @@
        g.drawString(str, 13 * i + 6, 16);     
    }  
     // 将认证码存入SESSION     
-   session.setAttribute("code", code);  
+   session.setAttribute("rand", code);  
    // 图象生效     
    g.dispose();     
    // 输出图象到页面     

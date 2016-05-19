@@ -79,3 +79,8 @@ function openPage(url) {
 function closePage() {
 	window.close();
 }
+
+//修改验证码
+function changeCode(obj) {
+	obj.src = "pages/image.jsp?tm=" + Math.random();
+}

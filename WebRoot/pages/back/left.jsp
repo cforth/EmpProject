@@ -39,7 +39,7 @@ H1 a {
 	height: 30px;
 	text-decoration: none;
 	moz-outline-style: none;
-	background-image: url(images/menu_bgS.gif);
+	background-image: url(images/menu_bgs.gif);
 	background-repeat: no-repeat;
 	line-height: 30px;
 	text-align: center;
@@ -171,8 +171,8 @@ H1 a {
           </tr>
         </table>
         <ul class="MM">
-          <li><a href="emp/emp_insert.jsp" target="main">增加雇员</a></li>
-          <li><a href="emp/emp_list.jsp" target="main">雇员列表</a></li>
+          <li><a href="pages/back/admin/emp/emp_insert.jsp" target="main">增加雇员</a></li>
+          <li><a href="pages/back/admin/emp/emp_list_details.jsp" target="main">雇员列表</a></li>
         </ul>
       </div>
       <h1 class="type"><a href="javascript:void(0)">部门管理</a></h1>
