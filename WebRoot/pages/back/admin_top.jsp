@@ -2,6 +2,8 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String logoutUrl = basePath + "pages/back/logout.jsp" ;
+String loginUrl = basePath +"/pages/back/login.jsp" ;
 %>
 
 <html>
@@ -11,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script language=JavaScript>
 function logout(){
 	if (confirm("您确定要退出控制面板吗？"))
-	top.location = "out.asp";
+	top.location = "<%=logoutUrl%>";
 	return false;
 }
 </script>
@@ -48,7 +50,7 @@ function showsubmenu(sid) {
     <td width="61%" height="64"><img src="images/logo.png" width="279" height="68" border="0"></td>
     <td width="39%" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="74%" height="38" class="admin_txt">管理员：<b></b> 您好,感谢登陆使用！</td>
+        <td width="74%" height="38" class="admin_txt">管理员：<b><%=session.getAttribute("aid")%></b> 您好,感谢登陆使用！</td>
         <td width="22%"><a href="#" target="_self" onClick="logout();"><img src="images/out.gif" alt="安全退出" width="46" height="20" border="0"></a></td>
         <td width="4%">&nbsp;</td>
       </tr>

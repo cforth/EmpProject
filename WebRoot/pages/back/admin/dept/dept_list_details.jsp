@@ -5,6 +5,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String empInsertUrl = basePath + "pages/back/admin/emp/emp_insert.jsp" ;
+String deptShowUrl = basePath + "pages/back/admin/dept/dept_show.jsp" ;
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -41,7 +42,7 @@ String empInsertUrl = basePath + "pages/back/admin/emp/emp_insert.jsp" ;
 	%>
 	<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
 		<td><%=vo.getDeptno()%></td>
-		<td><%=vo.getDname()%></td>
+		<td><a onclick="openPage('<%=deptShowUrl%>?deptno=<%=vo.getDeptno()%>')"><%=vo.getDname()%></a></td>
 		<td><%=vo.getLoc()%></td>
 		<td><%=vo.getStat().get("count")%></td>
 		<td><%=vo.getStat().get("sum")%></td>

@@ -7,7 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<base href="<%=basePath%>">
+<base href="<%=basePath%>"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>管理页面</title>
 
@@ -172,7 +172,9 @@ H1 a {
         </table>
         <ul class="MM">
           <li><a href="pages/back/admin/emp/emp_insert.jsp" target="main">增加雇员</a></li>
-          <li><a href="pages/back/admin/emp/emp_list_details.jsp" target="main">雇员列表</a></li>
+          <li><a href="pages/back/admin/emp/emp_list.jsp" target="main">雇员列表</a></li>
+          <li><a href="pages/back/admin/emp/emp_list_split.jsp" target="main">分页列表</a></li>
+          <li><a href="pages/back/admin/emp/emp_list_details.jsp" target="main">详细列表</a></li>
         </ul>
       </div>
       <h1 class="type"><a href="javascript:void(0)">部门管理</a></h1>
@@ -183,18 +185,9 @@ H1 a {
           </tr>
         </table>
         <ul class="MM">
-		  <li><a href="#" target="main">信息管理</a></li>
-          <li><a href="#" target="main">张贴管理</a></li>
-          <li><a href="#" target="main">增加商家</a></li>
-          <li><a href="#" target="main">管理商家</a></li>
-          <li><a href="#" target="main">发布资讯</a></li>
-          <li><a href="#" target="main">资讯管理</a></li>
-          <li><a href="#" target="main">市场联盟</a></li>
-          <li><a href="#" target="main">名片管理</a></li>
-          <li><a href="#" target="main">商城管理</a></li>
-          <li><a href="#" target="main">商品管理</a></li>
-          <li><a href="#" target="main">商城留言</a></li>
-          <li><a href="#" target="main">商城公告</a></li>
+		  <li><a href="pages/back/admin/dept/dept_insert.jsp" target="main">增加部门</a></li>
+		  <li><a href="pages/back/admin/dept/dept_list.jsp" target="main">部门列表</a></li>
+		  <li><a href="pages/back/admin/dept/dept_list_details.jsp" target="main">详细列表</a></li>
         </ul>
       </div>
       <h1 class="type"><a href="javascript:void(0)">注册用户管理</a></h1>

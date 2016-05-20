@@ -24,29 +24,11 @@ String indexUrl = basePath +"/pages/back/index.jsp" ;
 	response.setCharacterEncoding("UTF-8");
 %>
 <%
-	String msg = "验证码错误，请重新输入！";
-	String url = loginUrl ;
-	//首先进行验证码的判断
-	String code = request.getParameter("code");
-	String rand = (String) session.getAttribute("rand");
-	if(rand.equalsIgnoreCase(code)) {
-		//如果要进行检查。则必须使用MD5进行密码的加密处理
-		Admin vo = new Admin();
-		vo.setAid(request.getParameter("aid"));
-		vo.setPassword(new MD5Code().getMD5ofStr(request.getParameter("password")));
-		if(ServiceFactory.getIAdminServiceInstance().login(vo)) {
-			session.setAttribute("aid", vo.getAid()); //保存session属性
-			msg = "登陆成功，欢迎您的光临";
-			url = indexUrl;
-		} else {
-			msg = "登陆失败，错误的用户名或密码";
-			url = loginUrl;
-		}
-	}
+	session.invalidate(); //注销
 %>
 <script type="text/javascript">
-	window.alert("<%=msg%>");
-	window.location = "<%=url%>";
+	window.alert("用户注销成功，欢迎再来！");
+	window.location = "<%=loginUrl%>";
 </script>
 </body>
 </html>
