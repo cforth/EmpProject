@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="com.cfxyz.cf.factory.*"%>
 <%@ page import="com.cfxyz.cf.vo.*"%>
+<%@ page import="java.io.*"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -25,12 +26,25 @@ String url = basePath + "pages/back/admin/dept/dept_list.jsp" ;
 		for(int x = 0; x < result.length; x++) {
 			ids.add(Integer.parseInt(result[x]));
 		}
-		if(ServiceFactory.getIDeptServiceInstance().delete(ids)) {
+		Map<String,Object> map = ServiceFactory.getIDeptServiceInstance().delete(ids);
+		boolean flag = (boolean) map.get("flag");
+		if(flag) {
 			msg = "部门信息删除成功！";
+			//部门信息删除之后一定要删除对应的雇员照片
+			Set<String> photos = (Set<String>) map.get("allPhotos");
+			Iterator<String> iter = photos.iterator();
+			while(iter.hasNext()) {
+				String photo = iter.next();
+				if(!"nophoto.jpg".equals(photo)) { //不是nophoto，可以删除
+					String filePath = getServletContext().getRealPath("/upload/") + photo ;
+					File file = new File(filePath);
+					if(file.exists()) {
+						file.delete();
+					}
+				}
+			}
 		}
 	}
-
-
 
 %>
 <script type="text/javascript">

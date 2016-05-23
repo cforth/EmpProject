@@ -13,6 +13,20 @@ public class Emp implements Serializable {
 	private Double comm;
 	private Emp mgr ;
 	private Dept dept ;
+	private String photo ;
+	private String note ;
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
+	}
 	public Dept getDept() {
 		return dept;
 	}

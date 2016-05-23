@@ -1,5 +1,7 @@
 package com.cfxyz.cf.test.junit;
 
+import static org.junit.Assert.fail;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -40,13 +42,7 @@ public class IDeptServiceTest {
 
 	@Test
 	public void testDelete() {
-		Set<Integer> ids = new HashSet<Integer>();
-		ids.add(11);
-		try {
-			TestCase.assertTrue(ServiceFactory.getIDeptServiceInstance().delete(ids));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		fail("Not yet implemented");
 	}
 
 	@Test

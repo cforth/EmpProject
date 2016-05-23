@@ -1,6 +1,7 @@
 package com.cfxyz.cf.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import com.cfxyz.cf.vo.Emp;
 
@@ -44,4 +45,12 @@ public interface IEmpDAO extends IDAO<Integer, Emp> {
 	 */
 	public List<Emp> findAllByDeptno(Integer deptno, String column, String keyWord, 
 			Integer currentPage, Integer lineSize) throws Exception ;
+
+	/**
+	 * 取得指定部门的雇员的所有照片信息
+	 * @param deptno 部门名称
+	 * @return 返回所有的雇员照片信息，使用Set集合是避免重复照片
+	 * @throws Exception
+	 */
+	public Set<String> findAllPhotoByDeptno(Set<Integer> deptno) throws Exception ;
 }

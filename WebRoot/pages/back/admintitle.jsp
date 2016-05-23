@@ -210,23 +210,23 @@ body {
                 <td height="30" colspan="4" class="left_txt"><table width="100%" height="90" border="0" cellpadding="0" cellspacing="0">
                   <tr>
                     <td width="27%" align="center" bgcolor="#f2f2f2" class="left_txt">会员升会员需：</td>
-                    <td width="27%" bgcolor="#f2f2f2" class="left_txt"><input type="text" style="color=red" name="asb" value="<%=asb%>" size="2" class="button01" /></td>
+                    <td width="27%" bgcolor="#f2f2f2" class="left_txt"><input type="text" style="color=red" name="asb" value="" size="2" class="button01" /></td>
                     <td width="24%" bgcolor="#f2f2f2" class="left_txt">　会员升会员需</td>
-                    <td width="22%" bgcolor="#f2f2f2" class="left_txt"><input type="text" style="color=red" name="bsc" value="<%=bsc%>" size="2" class="button01" /></td>
+                    <td width="22%" bgcolor="#f2f2f2" class="left_txt"><input type="text" style="color=red" name="bsc" value="" size="2" class="button01" /></td>
                   </tr>
                   <tr>
                     <td align="center" class="left_txt">注册会员送：</td>
-                    <td class="left_txt"><input type="text" style="color=red" name="dxb" value="<%=dxb%>" size="2" class="button01" /></td>
+                    <td class="left_txt"><input type="text" style="color=red" name="dxb" value="" size="2" class="button01" /></td>
                     <td class="left_txt">发布信息商品消耗：</td>
-                    <td class="left_txt"><input type="text" style="color=red" name="hxb" value="<%=hxb%>" size="2" class="button01" />
+                    <td class="left_txt"><input type="text" style="color=red" name="hxb" value="" size="2" class="button01" />
                       /次</td>
                   </tr>
                   <tr>
                     <td align="center" bgcolor="#f2f2f2" class="left_txt">发布图片信息需：</td>
-                    <td bgcolor="#f2f2f2" class="left_txt"><input type="text" style="color=red" name="tdxb" value="<%=tdxb%>" size="2" class="button01" />
+                    <td bgcolor="#f2f2f2" class="left_txt"><input type="text" style="color=red" name="tdxb" value="" size="2" class="button01" />
                       /次</td>
                     <td bgcolor="#f2f2f2" class="left_txt">申请网上店铺需：</td>
-                    <td bgcolor="#f2f2f2" class="left_txt"><input type="text" style="color=red" name="ddxb" value="<%=ddxb%>" size="2" class="button01" /></td>
+                    <td bgcolor="#f2f2f2" class="left_txt"><input type="text" style="color=red" name="ddxb" value="" size="2" class="button01" /></td>
                   </tr>
                 </table></td>
                 </tr>
@@ -245,43 +245,43 @@ body {
               <td height="30" colspan="3"><table width="100%" height="89" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td height="30" align="center" bgcolor="#f2f2f2" class="left_txt">会员登陆1次积：
-                    <input name="dlf" type="text" class="button01" id="dlf" style="color=red" value="<%=dlf%>" size="2" />
+                    <input name="dlf" type="text" class="button01" id="dlf" style="color=red" value="" size="2" />
 分</td>
                   <td height="30" bgcolor="#f2f2f2" class="left_txt">介绍1位积：
-                    <input name="jjf" type="text" class="button01" id="jjf" style="color=red" value="<%=jjf%>" size="2" />
+                    <input name="jjf" type="text" class="button01" id="jjf" style="color=red" value="" size="2" />
 分</td>
                   <td height="30" bgcolor="#f2f2f2" class="left_txt">回复1次积：
-                    <input name="ddjf" type="text" class="button01" id="ddjf" style="color=red" value="<%=ddjf%>" size="2" />
+                    <input name="ddjf" type="text" class="button01" id="ddjf" style="color=red" value="" size="2" />
 分</td>
                   <td height="30" bgcolor="#f2f2f2" class="left_txt">积分
-                    <input name="hjf" type="text" class="button01" id="hjf" style="color=red" value="<%=hjf%>" size="2" />
+                    <input name="hjf" type="text" class="button01" id="hjf" style="color=red" value="" size="2" />
 可换1</td>
                 </tr>
                 <tr>
                   <td height="30" align="center" class="left_txt">发布信息广告积：
-                    <input name="xxjf" type="text" class="button01" id="xxjf" style="color=red" value="<%=xxjf%>" size="2" />
+                    <input name="xxjf" type="text" class="button01" id="xxjf" style="color=red" value="" size="2" />
 分</td>
                   <td height="30" class="left_txt">发布名片积：
-                    <input name="mpjf" type="text" class="button01" id="mpjf" style="color=red" value="<%=mpjf%>" size="2" />
+                    <input name="mpjf" type="text" class="button01" id="mpjf" style="color=red" value="" size="2" />
 分</td>
                   <td height="30" class="left_txt">加入市场联盟积：
-                    <input name="lmjf" type="text" class="button01" id="lmjf" style="color=red" value="<%=lmjf%>" size="2" />
+                    <input name="lmjf" type="text" class="button01" id="lmjf" style="color=red" value="" size="2" />
 分</td>
                   <td height="30" class="left_txt">发布商品积：
-                    <input name="spjf" type="text" class="button01" id="spjf" style="color=red" value="<%=spjf%>" size="2" />
+                    <input name="spjf" type="text" class="button01" id="spjf" style="color=red" value="" size="2" />
 分</td>
                 </tr>
                 <tr>
-                  <td height="30" align="center" bgcolor="#f2f2f2" class="left_txt"><input name="gghjf" type="text" class="button01" id="gghjf" style="color=red" value="<%=gghjf%>" size="2" />
+                  <td height="30" align="center" bgcolor="#f2f2f2" class="left_txt"><input name="gghjf" type="text" class="button01" id="gghjf" style="color=red" value="" size="2" />
                     换1置顶工具</td>
                   <td height="30" bgcolor="#f2f2f2" class="left_txt">改资料1次耗：
-                    <input name="zlhjf" type="text" class="button01" id="zlhjf" style="color=red" value="<%=zlhjf%>" size="2" />
+                    <input name="zlhjf" type="text" class="button01" id="zlhjf" style="color=red" value="" size="2" />
 分</td>
                   <td height="30" bgcolor="#f2f2f2" class="left_txt">修改发布耗：
-                    <input name="xghjf" type="text" class="button01" id="xghjf" style="color=red" value="<%=xghjf%>" size="2" />
+                    <input name="xghjf" type="text" class="button01" id="xghjf" style="color=red" value="" size="2" />
 分</td>
                   <td height="30" bgcolor="#f2f2f2" class="left_txt">上传认证奖：
-                    <input name="rzjf" type="text" class="button01" id="rzjf" style="color=red" value="<%=rzjf%>" size="2" />
+                    <input name="rzjf" type="text" class="button01" id="rzjf" style="color=red" value="" size="2" />
 分</td>
                 </tr>
               </table></td>

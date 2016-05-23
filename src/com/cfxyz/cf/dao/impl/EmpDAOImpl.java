@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -22,7 +24,7 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 
 	@Override
 	public boolean doCreate(Emp vo) throws Exception {
-		String sql = "INSERT INTO emp(empno,ename,job,hiredate,sal,comm,mgr,deptno) VALUES(?,?,?,?,?,?,?,?)" ;
+		String sql = "INSERT INTO emp(empno,ename,job,hiredate,sal,comm,mgr,deptno,photo,note) VALUES(?,?,?,?,?,?,?,?,?,?)" ;
 		this.pstmt = this.conn.prepareStatement(sql) ;
 		this.pstmt.setInt(1, vo.getEmpno());
 		this.pstmt.setString(2, vo.getEname());
@@ -40,12 +42,14 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 		} else {
 			this.pstmt.setInt(8, vo.getDept().getDeptno());
 		}
+		this.pstmt.setString(9, vo.getPhoto());
+		this.pstmt.setString(10, vo.getNote());
 		return this.pstmt.executeUpdate() > 0;
 	}
 
 	@Override
 	public boolean doUpdate(Emp vo) throws Exception {
-		String sql = "UPDATE emp SET ename=?,job=?,hiredate=?,sal=?,comm=?,mgr=?,deptno=? WHERE empno=?";
+		String sql = "UPDATE emp SET ename=?,job=?,hiredate=?,sal=?,comm=?,mgr=?,deptno=?,photo=?,note=? WHERE empno=?";
 		this.pstmt = this.conn.prepareStatement(sql);
 		this.pstmt.setString(1, vo.getEname());
 		this.pstmt.setString(2, vo.getJob());
@@ -62,7 +66,9 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 		} else {
 			this.pstmt.setInt(7, vo.getDept().getDeptno());
 		}
-		this.pstmt.setInt(8, vo.getEmpno());
+		this.pstmt.setString(8, vo.getPhoto());
+		this.pstmt.setString(9, vo.getNote());
+		this.pstmt.setInt(10, vo.getEmpno());
 		return this.pstmt.executeUpdate() > 0;
 	}
 
@@ -93,7 +99,7 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 	@Override
 	public List<Emp> findAll() throws Exception {
 		List<Emp> all = new ArrayList<Emp>();
-		String sql = "SELECT empno,ename,job,hiredate,sal,comm FROM emp" ;
+		String sql = "SELECT empno,ename,job,hiredate,sal,comm,photo,note FROM emp" ;
 		this.pstmt = this.conn.prepareStatement(sql);
 		ResultSet rs = this.pstmt.executeQuery();
 		while(rs.next()) {
@@ -104,6 +110,8 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 			vo.setHiredate(rs.getDate(4));
 			vo.setSal(rs.getDouble(5));
 			vo.setComm(rs.getDouble(6));
+			vo.setPhoto(rs.getString(7));
+			vo.setNote(rs.getString(8));
 			all.add(vo);
 		}
 		return all ;
@@ -114,7 +122,7 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 			String column, String keyWord) throws Exception {
 		List<Emp> all = new ArrayList<Emp>();
 		String sql = "SELECT * FROM ( "
-				+ " SELECT empno,ename,job,hiredate,sal,comm,ROWNUM rn FROM emp WHERE " + column + " LIKE ? AND ROWNUM <=?) temp "
+				+ " SELECT empno,ename,job,hiredate,sal,comm,photo,note,ROWNUM rn FROM emp WHERE " + column + " LIKE ? AND ROWNUM <=?) temp "
 				+ " WHERE temp.rn > ?" ;
 		this.pstmt = this.conn.prepareStatement(sql);
 		this.pstmt.setString(1, "%" + keyWord + "%");
@@ -129,6 +137,8 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 			vo.setHiredate(rs.getDate(4));
 			vo.setSal(rs.getDouble(5));
 			vo.setComm(rs.getDouble(6));
+			vo.setPhoto(rs.getString(7));
+			vo.setNote(rs.getString(8));
 			all.add(vo);
 		}
 		return all ;
@@ -151,7 +161,7 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 	public Emp findByIdDetails(Integer id) throws Exception {
 		Emp vo = null ;
 		String sql = "SELECT e.empno,e.ename,e.job,e.hiredate,e.sal,e.comm, "
-				+ " m.empno mno,m.ename mname,d.deptno dno,d.dname dna "
+				+ " m.empno mno,m.ename mname,d.deptno dno,d.dname dna,e.photo,e.note "
 				+ " FROM emp e, emp m, dept d "
 				+ " WHERE e.empno = ? AND e.mgr=m.empno(+) AND e.deptno=d.deptno(+)" ;
 		this.pstmt = this.conn.prepareStatement(sql);
@@ -173,6 +183,8 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 			dept.setDeptno(rs.getInt(9));
 			dept.setDname(rs.getString(10));
 			vo.setDept(dept);
+			vo.setPhoto(rs.getString(11));
+			vo.setNote(rs.getString(12));
 		}
 		return vo ;
 	}
@@ -183,7 +195,7 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 		List<Emp> all = new ArrayList<Emp>();
 		String sql = "SELECT * FROM ( "
 				+ " SELECT e.empno,e.ename,e.job,e.hiredate,e.sal,e.comm, "
-				+ " m.empno mno,m.ename mname,d.deptno dno,d.dname dna,ROWNUM rn "
+				+ " m.empno mno,m.ename mname,d.deptno dno,d.dname dna,e.photo,e.note,ROWNUM rn "
 				+ " FROM emp e,emp m, dept d "
 				+ " WHERE e. " 
 				+ column + " LIKE ? AND e.mgr=m.empno(+) AND e.deptno=d.deptno(+) AND ROWNUM <=?) temp "
@@ -209,6 +221,8 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 			dept.setDeptno(rs.getInt(9));
 			dept.setDname(rs.getString(10));
 			vo.setDept(dept);
+			vo.setPhoto(rs.getString(11));
+			vo.setNote(rs.getString(12));
 			all.add(vo);
 		}
 		return all ;
@@ -221,7 +235,7 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 		List<Emp> all = new ArrayList<Emp>();
 		String sql = "SELECT * FROM ( "
 				+ " SELECT e.empno,e.ename,e.job,e.hiredate,e.sal,e.comm, "
-				+ " m.empno mno,m.ename mname,d.deptno dno,d.dname dna,ROWNUM rn "
+				+ " m.empno mno,m.ename mname,d.deptno dno,d.dname dna,e.photo,e.note,ROWNUM rn "
 				+ " FROM emp e,emp m, dept d "
 				+ " WHERE e. " 
 				+ column + " LIKE ? AND d.deptno=? AND e.mgr=m.empno(+) AND e.deptno=d.deptno(+) AND ROWNUM <=?) temp "
@@ -248,9 +262,33 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 			dept.setDeptno(rs.getInt(9));
 			dept.setDname(rs.getString(10));
 			vo.setDept(dept);
+			vo.setPhoto(rs.getString(11));
+			vo.setNote(rs.getString(12));
 			all.add(vo);
 		}
 		return all ;
+	}
+
+	@Override
+	public Set<String> findAllPhotoByDeptno(Set<Integer> deptno)
+			throws Exception {
+		Set<String> allPhotos = new HashSet<String>();
+		if(deptno.size() == 0) {
+			return allPhotos ;
+		}
+		StringBuffer buf = new StringBuffer();
+		buf.append("SELECT photo FROM emp WHERE deptno IN ");
+		Iterator<Integer> iter = deptno.iterator();
+		while(iter.hasNext()) {
+			buf.append(iter.next()).append(",");
+		}
+		buf.delete(buf.length()-1, buf.length()).append(")");
+		this.pstmt = this.conn.prepareStatement(buf.toString());
+		ResultSet rs = this.pstmt.executeQuery();
+		while(rs.next()) {
+			allPhotos.add(rs.getString(1));
+		}
+		return allPhotos;
 	}
 
 }
