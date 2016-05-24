@@ -85,7 +85,7 @@ String deptShowUrl = basePath + "pages/back/admin/dept/dept_show.jsp" ;
 			Emp vo = iter.next() ;
 	%>
 	<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
-		<td><input type="checkbox" id="empno" name="empno" value="<%=vo.getEmpno()%>"></td>
+		<td><input type="checkbox" id="empno" name="empno" value="<%=vo.getEmpno()%>:<%=vo.getPhoto()%>"></td>
 		<td><%=vo.getEmpno()%></td>
 		<td><a onclick="openPage('<%=showUrl%>?empno=<%=vo.getEmpno()%>')"><%=vo.getEname()%></a></td>
 		<td><%=vo.getJob()%></td>

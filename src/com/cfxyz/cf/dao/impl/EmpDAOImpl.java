@@ -277,7 +277,7 @@ public class EmpDAOImpl extends AbstractDAOImpl implements IEmpDAO {
 			return allPhotos ;
 		}
 		StringBuffer buf = new StringBuffer();
-		buf.append("SELECT photo FROM emp WHERE deptno IN ");
+		buf.append("SELECT photo FROM emp WHERE deptno IN (");
 		Iterator<Integer> iter = deptno.iterator();
 		while(iter.hasNext()) {
 			buf.append(iter.next()).append(",");

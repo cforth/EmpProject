@@ -33,42 +33,43 @@ String deptShowUrl = basePath + "pages/back/admin/dept/dept_show.jsp" ;
 		<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
 			<td width="15%"><strong>雇员编号：</strong></td>
 			<td width="45%"><span class="init"><%=vo.getEmpno()%></span></td>
-			<td width="40%"><span id="empnoMsg"></span></td>
+			<td width="40%"><strong>雇员照片：</strong></td>
 		</tr>
 		<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
 			<td width="15%"><strong>雇员名称：</strong></td>
 			<td width="45%"><%=vo.getEname()%></td>
-			<td width="40%"><span id="enameMsg"></span></td>
+			<td width="40%" rowspan="8"><img src="upload/<%=vo.getPhoto()%>"></td>
 		</tr>
 		<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
 			<td width="15%"><strong>雇员职位：</strong></td>
 			<td width="45%"><%=vo.getJob()%></td>
-			<td width="40%"><span id="jobMsg"></span></td>
 		</tr>
 		<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
 			<td width="15%"><strong>雇员领导：</strong></td>
 			<td width="45%"><a href="<%=showUrl%>?empno=<%=vo.getMgr().getEmpno()%>"><%=vo.getMgr().getEname() == null ? "" : vo.getMgr().getEname()%></a></td>
-			<td width="40%"><span id="hiredateMsg"></span></td>
 		</tr>
 		<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
 			<td width="15%"><strong>所在部门：</strong></td>
 			<td width="45%"><a href="<%=deptShowUrl%>?deptno=<%=vo.getDept().getDeptno()%>"><%=vo.getDept().getDname() == null ? "" : vo.getDept().getDname()%></a></td>
-			<td width="40%"><span id="hiredateMsg"></span></td>
 		</tr>
 		<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
 			<td width="15%"><strong>雇佣日期：</strong></td>
 			<td width="45%"><%=vo.getHiredate()%></td>
-			<td width="40%"><span id="hiredateMsg"></span></td>
 		</tr>
 		<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
 			<td width="15%"><strong>工资：</strong></td>
 			<td width="45%"><%=vo.getSal()%></td>
-			<td width="40%"><span id="salMsg"></span></td>
 		</tr>
 		<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
 			<td width="15%"><strong>佣金：</strong></td>
 			<td width="45%"><%=vo.getComm()%></td>
-			<td width="40%"><span id="commMsg"></span></td>
+		</tr>
+		<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
+			<td width="15%"><strong>雇员介绍：</strong></td>
+			<td width="45%">&nbsp;</td>
+		</tr>
+		<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
+			<td colspan="3"><%=vo.getNote() != null ? vo.getNote() : "暂无介绍"%></td>
 		</tr>
 	</table>
 <% 
