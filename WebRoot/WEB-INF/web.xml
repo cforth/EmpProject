@@ -6,4 +6,12 @@
     <welcome-file>login.jsp</welcome-file>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+  	<servlet-name>loginServlet</servlet-name>
+  	<servlet-class>com.cfxyz.cf.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>loginServlet</servlet-name>
+  	<url-pattern>/pages/back/LoginServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

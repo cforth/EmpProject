@@ -2,7 +2,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-String loginUrl = basePath + "pages/back/check.jsp" ;
+String loginUrl = basePath + "pages/back/LoginServlet" ;
 %>
 
 <title>网站管理员登陆</title>
