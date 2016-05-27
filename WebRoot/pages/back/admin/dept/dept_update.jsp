@@ -1,11 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="com.cfxyz.cf.vo.*"%>
-<%@ page import="com.cfxyz.cf.factory.*"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-String updateUrl = basePath + "pages/back/admin/dept/dept_update_do.jsp" ;
-String listUrl = basePath + "pages/back/admin/dept/dept_list.jsp" ;
+String updateUrl = basePath + "pages/back/admin/dept/DeptServlet/update" ;
+String listUrl = basePath + "pages/back/admin/dept/DeptServlet/list" ;
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -21,8 +20,7 @@ String listUrl = basePath + "pages/back/admin/dept/dept_list.jsp" ;
 <body>
 <% 
 	//接收地址重写传递而来的部门编号
-	int deptno = Integer.parseInt(request.getParameter("deptno")) ;
-	Dept vo = ServiceFactory.getIDeptServiceInstance().updatePre(deptno) ;
+	Dept vo = (Dept)request.getAttribute("dept") ;
 	if(vo != null) {
 %>
 	<form action="<%=updateUrl%>" method="post" onsubmit="return validateUpdate()">

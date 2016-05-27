@@ -2,8 +2,8 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-String insertUrl = basePath + "pages/back/admin/dept/dept_insert_do.jsp" ;
-String listUrl = basePath + "pages/back/admin/dept/dept_list.jsp" ;
+String insertUrl = basePath + "pages/back/admin/dept/DeptServlet/insert" ;
+String listUrl = basePath + "pages/back/admin/dept/DeptServlet/list" ;
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

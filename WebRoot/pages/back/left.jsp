@@ -186,8 +186,8 @@ H1 a {
         </table>
         <ul class="MM">
 		  <li><a href="pages/back/admin/dept/dept_insert.jsp" target="main">增加部门</a></li>
-		  <li><a href="pages/back/admin/dept/dept_list.jsp" target="main">部门列表</a></li>
-		  <li><a href="pages/back/admin/dept/dept_list_details.jsp" target="main">详细列表</a></li>
+		  <li><a href="pages/back/admin/dept/DeptServlet/list" target="main">部门列表</a></li>
+		  <li><a href="pages/back/admin/dept/DeptServlet/listDetails" target="main">详细列表</a></li>
         </ul>
       </div>
       <h1 class="type"><a href="javascript:void(0)">注册用户管理</a></h1>

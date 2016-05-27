@@ -1,12 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="com.cfxyz.cf.vo.*"%>
-<%@ page import="com.cfxyz.cf.factory.*"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String insertUrl = basePath + "pages/back/admin/dept/dept_insert.jsp" ;
-String deleteUrl = basePath + "pages/back/admin/dept/dept_delete_do.jsp" ;
-String updatePreUrl = basePath + "pages/back/admin/dept/dept_update.jsp" ;
+String deleteUrl = basePath + "pages/back/admin/dept/DeptServlet/delete" ;
+String updatePreUrl = basePath + "pages/back/admin/dept/DeptServlet/updatePre" ;
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -21,7 +20,7 @@ String updatePreUrl = basePath + "pages/back/admin/dept/dept_update.jsp" ;
   
 <body>
 <%
-	List<Dept> all = ServiceFactory.getIDeptServiceInstance().list() ;
+	List<Dept> all = (List<Dept>)request.getAttribute("allDepts") ;
 	Iterator<Dept> iter = all.iterator() ;
 %>
 <h1>部门列表</h1>

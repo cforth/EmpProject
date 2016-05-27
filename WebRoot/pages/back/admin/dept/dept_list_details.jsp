@@ -1,6 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="com.cfxyz.cf.vo.*"%>
-<%@ page import="com.cfxyz.cf.factory.*"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -20,7 +19,7 @@ String deptShowUrl = basePath + "pages/back/admin/dept/dept_show.jsp" ;
   
 <body>
 <%
-	List<Dept> all = ServiceFactory.getIDeptServiceInstance().listDetails() ;
+	List<Dept> all = (List<Dept>)request.getAttribute("allDepts") ;
 	Iterator<Dept> iter = all.iterator() ;
 %>
 <h1>部门列表</h1>
