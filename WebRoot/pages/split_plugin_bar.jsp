@@ -7,6 +7,8 @@
 --%>
 <%
     request.setCharacterEncoding("UTF-8") ;
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
 %>
 <%
 	String url = null;
@@ -32,7 +34,7 @@
 	} catch (Exception e) {}
 	column = (String)request.getAttribute("column") ;
 	keyWord = (String)request.getAttribute("keyWord") ;
-	url = (String)request.getAttribute("url") ;
+	url = basePath + request.getAttribute("url") ;
 %>
 <script type="text/javascript">
     function goSplit(vcp) { //根据外部传递的cp内容进行操作

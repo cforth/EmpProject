@@ -35,9 +35,9 @@ String updateUrl = basePath + "pages/back/admin/emp/EmpServlet/update" ;
 	<script type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
 	<script type="text/javascript" src="js/cfxyz.js"></script>
 	<script type="text/javascript" src="js/emp.js"></script>
-	<script type="text/javascript" charset="utf-8" src="pages/back/admin/emp/edit/lang/zh_CN.js"></script>
-	<script type="text/javascript" charset="utf-8" src="pages/back/admin/emp/edit/kindeditor-core.js"></script>
-	<script type="text/javascript" charset="utf-8" src="pages/back/admin/emp/edit/plugin-all.js"></script>
+	<script type="text/javascript" charset="utf-8" src="edit/lang/zh_CN.js"></script>
+	<script type="text/javascript" charset="utf-8" src="edit/kindeditor-core.js"></script>
+	<script type="text/javascript" charset="utf-8" src="edit/plugin-all.js"></script>
 	<script type="text/javascript">
 		KE.show({
 			id : 'note',

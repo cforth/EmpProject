@@ -56,7 +56,19 @@ KE.util = {
         }
     },
     getHtmlPath : function() {
-        return location.href.substring(0, location.href.lastIndexOf('/') + 1);
+    	//修复servlet页面时组件的basePath错误,edit目录必须放在根目录下      2016.06
+        //源代码：  return location.href.substring(0, location.href.lastIndexOf('/') + 1);
+    	//修改后如下，取得项目的根目录
+    	//获取当前网址，如： http://localhost:8088/test/test.jsp
+        var curPath=location.href;
+        //获取主机地址之后的目录，如： test/test.jsp
+        var pathName=location.pathname;
+        var pos=curPath.indexOf(pathName);
+        //获取主机地址，如： http://localhost:8088
+        var localhostPath=curPath.substring(0,pos);
+        //获取带"/"的项目名，如：/test
+        var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+        return(localhostPath+projectName);
     },
     getBrowser : function() {
         var browser = '';
