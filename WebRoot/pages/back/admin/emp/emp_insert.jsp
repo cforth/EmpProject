@@ -1,11 +1,10 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ page import="com.cfxyz.cf.vo.*"%>
-<%@ page import="com.cfxyz.cf.factory.*"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://www.cfxyz.com/c"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-String insertUrl = basePath + "pages/back/admin/emp/emp_insert_do.jsp" ;
-String listUrl = basePath + "pages/back/admin/emp/emp_list_details.jsp" ;
+String insertUrl = basePath + "pages/back/admin/emp/EmpServlet/insert" ;
+String listUrl = basePath + "pages/back/admin/emp/EmpServlet/listDetails" ;
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -49,15 +48,6 @@ String listUrl = basePath + "pages/back/admin/emp/emp_list_details.jsp" ;
 </head>
   
 <body>
-<% 
-	int deptno = 0;
-	if(request.getParameter("deptno") != null) {
-		deptno = Integer.parseInt(request.getParameter("deptno")) ;
-	}
-	Map<String,Object> map = ServiceFactory.getIEmpServiceInstance().insertPre();
-	List<Emp> allEmps = (List<Emp>)map.get("allEmps"); //列出已有的雇员信息
-	List<Dept> allDepts = (List<Dept>)map.get("allDepts"); //列出已有的部门信息
-%>
 	<form action="<%=insertUrl%>" method="post" onsubmit="return validateInsert()" enctype="multipart/form-data">
 		<table border="1" cellpadding="5" cellspacing="0" bgcolor="#F2F2F2" width="100%">
 			<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
@@ -85,15 +75,11 @@ String listUrl = basePath + "pages/back/admin/emp/emp_list_details.jsp" ;
 				<td>
 					<select name="mgr" id="mgr" class="init">
 						<option value="0">==== 没有领导 ====</option>
-						<% 
-							Iterator<Emp> empIter = allEmps.iterator();
-							while(empIter.hasNext()) {
-								Emp tempEmp = empIter.next();
-						%>
-								<option value="<%=tempEmp.getEmpno()%>"><%=tempEmp.getEname()%></option>
-						<%
-							}
-						%>
+						<c:if test="${allEmps != null}" var="res">
+							<c:forEach items="${allEmps}" var="t_emp">
+								<option value="${t_emp.empno}">${t_emp.ename}</option>
+							</c:forEach>
+						</c:if>
 					</select>
 				</td>
 				<td><span id="mgrMsg"></span></td>
@@ -103,15 +89,11 @@ String listUrl = basePath + "pages/back/admin/emp/emp_list_details.jsp" ;
 				<td>
 					<select name="deptno" id="deptno" class="init">
 						<option value="0">==== 没有部门 ====</option>
-						<% 
-							Iterator<Dept> deptIter = allDepts.iterator();
-							while(deptIter.hasNext()) {
-								Dept tempDept = deptIter.next();
-						%>
-								<option value="<%=tempDept.getDeptno()%>" <%=tempDept.getDeptno().equals(deptno) ? "selected" : ""%> ><%=tempDept.getDname()%></option>
-						<%
-							}
-						%>
+						<c:if test="${allDepts != null}" var="res">
+							<c:forEach items="${allDepts}" var="t_dept">
+								<option value="${t_dept.deptno}" ${t_dept.deptno == param.deptno ? "selected" : ""}>${t_dept.dname}</option>
+							</c:forEach>
+						</c:if>
 					</select>
 				</td>
 				<td><span id="deptnoMsg"></span></td>

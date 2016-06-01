@@ -171,10 +171,10 @@ H1 a {
           </tr>
         </table>
         <ul class="MM">
-          <li><a href="pages/back/admin/emp/emp_insert.jsp" target="main">增加雇员</a></li>
-          <li><a href="pages/back/admin/emp/emp_list.jsp" target="main">雇员列表</a></li>
-          <li><a href="pages/back/admin/emp/emp_list_split.jsp" target="main">分页列表</a></li>
-          <li><a href="pages/back/admin/emp/emp_list_details.jsp" target="main">详细列表</a></li>
+          <li><a href="pages/back/admin/emp/EmpServlet/insertPre" target="main">增加雇员</a></li>
+          <li><a href="pages/back/admin/emp/EmpServlet/list" target="main">雇员列表</a></li>
+          <li><a href="pages/back/admin/emp/EmpServlet/listSplit" target="main">分页列表</a></li>
+          <li><a href="pages/back/admin/emp/EmpServlet/listDetails" target="main">详细列表</a></li>
         </ul>
       </div>
       <h1 class="type"><a href="javascript:void(0)">部门管理</a></h1>

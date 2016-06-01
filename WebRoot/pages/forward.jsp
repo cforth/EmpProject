@@ -20,7 +20,7 @@
 <body>
 <script type="text/javascript">
 	alert("<%=request.getAttribute("msg")%>");
-	window.location = "<%=basePath%><%=request.getAttribute("url")%>";
+	window.location = "<%=request.getAttribute("url")%>";
 </script>
 </body>
 </html>

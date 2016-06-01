@@ -1,17 +1,8 @@
 <%@ page pageEncoding="UTF-8"%>
 <%--
 	代码的引用过程
-	<div id="barDiv">
-    <jsp:include page="pages/split_plugin_bar.jsp">
-        <jsp:param name="currentPage" value="<%=currentPage%>"/>
-        <jsp:param name="lineSize" value="<%=lineSize%>"/>
-        <jsp:param name="column" value="<%=column%>"/>
-        <jsp:param name="keyWord" value="<%=keyWord%>"/>
-        <jsp:param name="allRecorders" value="<%=allRecorders%>"/>
-        <jsp:param name="url" value="<%=url%>"/>
-        <jsp:param name="paramName" value="参数名称"/>
-        <jsp:param name="paramValue" value="参数内容"/>
-    </jsp:include>
+	<div id="barDiv" style="float:right">
+    	<jsp:include page="/pages/split_plugin_bar.jsp"/>
 	</div>
 --%>
 <%
@@ -31,17 +22,17 @@
 %>
 <% //接受传递的参数
 	try {
-		currentPage = Integer.parseInt(request.getParameter("currentPage")) ;
+		currentPage = (Integer)request.getAttribute("currentPage") ;
 	} catch (Exception e) {}
 	try {
-		lineSize = Integer.parseInt(request.getParameter("lineSize")) ;
+		lineSize = (Integer)request.getAttribute("lineSize") ;
 	} catch (Exception e) {}
     try {
-		allRecorders = Integer.parseInt(request.getParameter("allRecorders")) ;
+		allRecorders = (Integer)request.getAttribute("allRecorders") ;
 	} catch (Exception e) {}
-	column = request.getParameter("column") ;
-	keyWord = request.getParameter("keyWord") ;
-	url = request.getParameter("url") ;
+	column = (String)request.getAttribute("column") ;
+	keyWord = (String)request.getAttribute("keyWord") ;
+	url = (String)request.getAttribute("url") ;
 %>
 <script type="text/javascript">
     function goSplit(vcp) { //根据外部传递的cp内容进行操作

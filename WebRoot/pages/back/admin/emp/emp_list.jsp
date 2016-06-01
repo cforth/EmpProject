@@ -1,13 +1,12 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ page import="com.cfxyz.cf.vo.*"%>
-<%@ page import="com.cfxyz.cf.factory.*"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://www.cfxyz.com/c"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-String insertUrl = basePath + "pages/back/admin/emp/emp_insert.jsp" ;
-String deleteUrl = basePath + "pages/back/admin/emp/emp_delete_do.jsp" ;
-String updatePreUrl = basePath + "pages/back/admin/emp/emp_update.jsp" ;
-String backUrl = basePath + "pages/back/admin/emp/emp_list.jsp" ;
+String insertUrl = basePath + "pages/back/admin/emp/EmpServlet/insertPre" ;
+String deleteUrl = basePath + "pages/back/admin/emp/EmpServlet/delete" ;
+String updatePreUrl = basePath + "pages/back/admin/emp/EmpServlet/updatePre" ;
+String backUrl = basePath + "pages/back/admin/emp/EmpServlet/list" ;
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -21,10 +20,6 @@ String backUrl = basePath + "pages/back/admin/emp/emp_list.jsp" ;
 </head>
   
 <body>
-<%
-	List<Emp> all = ServiceFactory.getIEmpServiceInstance().list() ;
-	Iterator<Emp> iter = all.iterator() ;
-%>
 <h1>雇员列表</h1>
 <table border="1" cellpadding="5" cellspacing="0" bgcolor="#F2F2F2" width="100%">
 	<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
@@ -37,23 +32,20 @@ String backUrl = basePath + "pages/back/admin/emp/emp_list.jsp" ;
 		<td width=10%><strong>佣金</strong></td>
 		<td width=10%><strong>操作</strong></td>
 	</tr>
-	<% 
-		while(iter.hasNext()) {
-			Emp vo = iter.next() ;
-	%>
-	<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
-		<td><input type="checkbox" id="empno" name="empno" value="<%=vo.getEmpno()%>"></td>
-		<td><%=vo.getEmpno()%></td>
-		<td><%=vo.getEname()%></td>
-		<td><%=vo.getJob()%></td>
-		<td><%=vo.getHiredate()%></td>
-		<td><%=vo.getSal()%></td>
-		<td><%=vo.getComm()%></td>
-		<td><a href="<%=updatePreUrl%>?empno=<%=vo.getEmpno()%>&backurl=<%=backUrl%>">修改</a></td>
-	</tr>
-	<%
-		}
-	%>
+	<c:if test="${allEmps != null}" var="res">
+		<c:forEach items="${allEmps}" var="t_emp">
+			<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
+				<td><input type="checkbox" id="empno" name="empno" value="${t_emp.empno}"></td>
+				<td>${t_emp.empno}</td>
+				<td>${t_emp.ename}</td>
+				<td>${t_emp.job}</td>
+				<td>${t_emp.hiredate}</td>
+				<td>${t_emp.sal}</td>
+				<td>${t_emp.comm}</td>
+				<td><a href="<%=updatePreUrl%>?empno=${t_emp.empno}&backurl=<%=backUrl%>">修改</a></td>
+			</tr>
+		</c:forEach>
+	</c:if>
 	<tr onmouseover="changColor(this,'#FFFFFF')" onmouseout="changColor(this,'#F2F2F2')">
 		<td colspan="8">
 		<input type="button" value="删除雇员信息" onclick="deleteAll('<%=deleteUrl%>?backurl=<%=backUrl%>','eno','empno')">

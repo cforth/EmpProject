@@ -14,6 +14,14 @@
   	<servlet-name>deptServlet</servlet-name>
   	<servlet-class>com.cfxyz.cf.servlet.DeptServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>empServlet</servlet-name>
+  	<servlet-class>com.cfxyz.cf.servlet.EmpServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>empServlet</servlet-name>
+  	<url-pattern>/pages/back/admin/emp/EmpServlet/*</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>deptServlet</servlet-name>
   	<url-pattern>/pages/back/admin/dept/DeptServlet/*</url-pattern>
@@ -22,4 +30,10 @@
   	<servlet-name>loginServlet</servlet-name>
   	<url-pattern>/pages/back/LoginServlet</url-pattern>
   </servlet-mapping>
+  <jsp-config>
+  	<taglib>
+  		<taglib-uri>http://www.cfxyz.com/c</taglib-uri>
+  		<taglib-location>/WEB-INF/c.tld</taglib-location>
+  	</taglib>
+  </jsp-config>
 </web-app>

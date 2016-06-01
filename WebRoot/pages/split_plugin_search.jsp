@@ -1,13 +1,8 @@
 <%@ page pageEncoding="UTF-8"%>
 <%--
-<div id="splitSearchDiv">
-    <jsp:include page="/pages/split_plugin_search.jsp">
-        <jsp:param name="columnData" value="<%=columnData%>"/>
-        <jsp:param name="keyWord" value="<%=keyWord%>"/>
-        <jsp:param name="allRecorders" value="<%=allRecorders%>"/>
-        <jsp:param name="column" value="<%=column%>"/>
-    </jsp:include>
-</div>
+	<div id="splitSearchDiv">
+    	<jsp:include page="/pages/split_plugin_search.jsp"/>
+	</div>
 --%>
 <%
     request.setCharacterEncoding("UTF-8") ;
@@ -20,11 +15,11 @@
 %>
 <%
     try {
-        allRecorders = Integer.parseInt(request.getParameter("allRecorders"));
+        allRecorders = (Integer)request.getAttribute("allRecorders");
     } catch(Exception e) {};
-    columnData = request.getParameter("columnData");
-    keyWord = request.getParameter("keyWord");
-    column = request.getParameter("column");
+    columnData = (String)request.getAttribute("columnData");
+    keyWord = (String)request.getAttribute("keyWord");
+    column = (String)request.getAttribute("column");
 %>
 请输入查询关键字：
 <%
