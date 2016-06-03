@@ -26,7 +26,6 @@ public class EmpServlet extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		String path = "pages/errors.jsp";
 		String status = request.getRequestURI().substring(request.getRequestURI().lastIndexOf("/") + 1) ;
 		if (status != null) { //表示现在有了status操作
