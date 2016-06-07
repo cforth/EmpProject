@@ -1,4 +1,4 @@
-package com.cfxyz.cf.util.filter;
+package com.cfxyz.cf.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;

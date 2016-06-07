@@ -10,7 +10,7 @@
   
   <filter>
   	<filter-name>encodingFilter</filter-name>
-  	<filter-class>com.cfxyz.cf.util.filter.EncodingFilter</filter-class>
+  	<filter-class>com.cfxyz.cf.filter.EncodingFilter</filter-class>
   	<init-param>
   		<param-name>charset</param-name>
   		<param-value>UTF-8</param-value>
@@ -19,6 +19,18 @@
   <filter-mapping>
   	<filter-name>encodingFilter</filter-name>
   	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter>
+  	<filter-name>loginFilter</filter-name>
+  	<filter-class>com.cfxyz.cf.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>loginFilter</filter-name>
+  	<url-pattern>/pages/back/admin/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>loginFilter</filter-name>
+  	<url-pattern>/pages/back/index.jsp</url-pattern>
   </filter-mapping>
   
   

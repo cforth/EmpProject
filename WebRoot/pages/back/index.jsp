@@ -10,16 +10,6 @@ String loginUrl = basePath +"/pages/back/login.jsp" ;
 <title>管理中心</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 </head>
-<%
-	if(session.getAttribute("aid") == null) { //没有登录
-%>
-		<script type="text/javascript">
-			alert("您还未登录，请先登陆！");
-			window.location = "<%=loginUrl%>" ;
-		</script>
-<%
-	}
-%>
 <frameset rows="64,*"  frameborder="NO" border="0" framespacing="0">
 	<frame src="admin_top.jsp" noresize="noresize" frameborder="NO" name="topFrame" scrolling="no" marginwidth="0" marginheight="0" target="main" />
   <frameset cols="200,*"  rows="560,*" id="frame">
