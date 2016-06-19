@@ -3,7 +3,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-String empInsertUrl = basePath + "pages/back/admin/emp/emp_insert.jsp" ;
+String empInsertUrl = basePath + "pages/back/admin/emp/EmpServlet/insertPre" ;
 String deptShowUrl = basePath + "pages/back/admin/dept/dept_show.jsp" ;
 %>
 

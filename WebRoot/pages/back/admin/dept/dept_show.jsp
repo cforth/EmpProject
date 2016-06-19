@@ -12,7 +12,7 @@ String insertUrl = basePath + "pages/back/admin/emp/emp_insert.jsp" ;
 String deleteUrl = basePath + "pages/back/admin/emp/emp_delete_do.jsp" ;
 String updatePreUrl = basePath + "pages/back/admin/emp/emp_update.jsp" ;
 String backUrl = basePath + "pages/back/admin/dept/dept_show.jsp" ;
-String showUrl = basePath + "pages/back/admin/emp/emp_show.jsp" ;
+String showUrl = basePath + "pages/back/admin//emp/EmpServlet/show" ;
 String deptShowUrl = basePath + "pages/back/admin/dept/dept_show.jsp" ;
 %>
 
